@@ -1,0 +1,131 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="author" content="Sara Muriega">
+    <meta name="description" content="Proyecto Editor de memes correspondiente al segundo módulo de ADA">
+    <title>Editor de memes</title>
+</head>
+<body>
+    <!--------------------------START HEADER--------------------------------------->
+    <header>
+        <h1 aria-label="generador de texto" id="tittleApp" lang="es">Generador de memes</h1>
+        <section id="containerMenuButtons">
+            <button aria-label="boton de imagen" id="imageButton">
+                Imagen
+            </button>
+
+            <button aria-label="boton de texto" id="textButton">
+                Texto
+            </button>
+
+            <button aria-label="boton de modo oscuro" id="darkModeButton">
+                Modo oscuro
+            </button>
+        </section>
+
+    </header>
+    <!--------------------------END HEADER----------------------------------------->
+
+    <!--------------------------START MAIN----------------------------------------->
+    <main>
+        <section aria-label="contenedor principal" id="mainContainer">
+            <h2 aria-label="texto superior" id="topText" lang="es">TOP TEXT</h2>
+            <h2 aria-label="texto inferior" id="bottomText" lang="es">BOTTOM TEXT</h2>
+            <button aria-label="Botón para descargar el meme" id="downloadButton">Descargar meme</button>
+        </section>
+    </main>
+    <!--------------------------END MAIN------------------------------------------->
+
+    <!--------------------------START IMAGE PANEL---------------------------------->
+    <aside>
+        <section aria-label="sección panel de control de imagen" class="controlPanel">
+
+            <article class="headerControlPanelContainer">
+                <h2 aria-label="Panel de control de imagen" class="tittleControlPanel" lang="es">IMAGEN</h2>
+            </article>
+
+            <article id="urlImgContainer">
+                <h3>URL</h3>
+                <input aria-label="url de la imagen" type="url" id="imgUrlInput">
+            </article>
+
+            <article id="colorControlPanelContainer">
+                <div id="backgroundSettingsContainer">
+                    <h3 class="boldTittleSettings">FONDO</h3>
+                    <input aria-label="escoge el fondo del meme" type="color" id="imgBackColorInput">
+                </div>
+
+                <select aria-label="Selecciona el modo de fusión del fondo de la imagen" id="blendBackImg"></select>
+            </article>
+
+            <article id="filtersControlPanelContainer">
+               <h3 class="boldTittleSettings">FILTROS</h3>
+
+               <div class="controlPanelSlider">
+                   <h3 class="tittleSettings">BRILLO</h3>
+                   <input type="range" id="brightness" min="0" max="1" value="1" step="0.1">
+               </div>
+               
+               <div class="controlPanelSlider">
+                   <h3 class="tittleSettings">OPACIDAD</h3>
+                   <input type="range" id="opacity" min="0" max="1" value="1" step="0.1">
+               </div>
+
+               <div class="controlPanelSlider">
+                <h3 class="tittleSettings">CONTRASTE</h3>
+                <input type="range" id="contrast" min="100" max="1000" value="100">
+               </div>
+
+               <div class="controlPanelSlider">
+                <h3 class="tittleSettings">DESENFOQUE</h3>
+                <input type="range" id="blur" min="0" max="10" value="0" step="0.1">
+               </div>
+
+               <div class="controlPanelSlider">
+                <h3 class="tittleSettings">ESCALA DE GRISES</h3>
+                <input type="range" id="grayscale" min="0" max="100" value="0">
+               </div>
+
+               <div class="controlPanelSlider">
+                <h3 class="tittleSettings">SEPIA</h3>
+                <input type="range" id="sepia" min="0" max="100" value="0">
+               </div>
+
+               <div class="controlPanelSlider">
+                <h3 class="tittleSettings">HUE</h3>
+                <input type="range" id="hue" min="0" max="360" value="0">
+               </div>
+
+               <div class="controlPanelSlider">
+                <h3 class="tittleSettings">SATURADO</h3>
+                <input type="range" id="saturated" min="100" max="1000" value="100" step="10">
+               </div>
+
+               <div class="controlPanelSlider">
+                <h3 class="tittleSettings">NEGATIVO</h3>
+                <input type="range" id="negative" min="0" max="1" value="0" step="0.1">
+               </div>
+
+               <button id="imageFiltersButton"  aria-label="boton de reestablecer filtros"> RESTABLECER FILTROS</button>
+            </article>
+
+        </section>
+        
+    </aside>
+    <!--------------------------END IMAGE PANEL------------------------------------>
+
+    <!--------------------------START TEXT PANEL----------------------------------->
+    <aside>
+
+    </aside>
+    <!--------------------------END TEXT PANEL------------------------------------->
+
+    <!---->
+
+
+
+</body>
+</html>

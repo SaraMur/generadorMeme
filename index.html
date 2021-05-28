@@ -1,131 +1,287 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" id="css" href="./style.css">
+    
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/FileSaver.js/2.0.0/FileSaver.min.js" integrity="sha512-csNcFYJniKjJxRWRV1R7fvnXrycHP6qDR21mgz1ZP55xY5d+aHLfo9/FcGDQLfn2IfngbAHd8LdfsagcCqgTcQ==" crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/dom-to-image/2.6.0/dom-to-image.min.js" integrity="sha512-01CJ9/g7e8cUmY0DFTMcUw/ikS799FHiOA0eyHsUWfOetgbx/t6oV4otQ5zXKQyIrQGTHSmRVPIgrgLcZi/WMA==" crossorigin="anonymous"></script>
+    
+
+    <script src="https://kit.fontawesome.com/e363a095bd.js" crossorigin="anonymous"></script>
     <meta name="author" content="Sara Muriega">
     <meta name="description" content="Proyecto Editor de memes correspondiente al segundo módulo de ADA">
     <title>Editor de memes</title>
 </head>
-<body>
+
+<body class="cambiarModoOscuro">
     <!--------------------------START HEADER--------------------------------------->
-    <header>
-        <h1 aria-label="generador de texto" id="tittleApp" lang="es">Generador de memes</h1>
+    <header id="headerContainer">
+        <h1 aria-label="generador de texto" id="tittleApp" class="tittleApp" lang="es">GENERADOR DE MEMES</h1>
         <section id="containerMenuButtons">
-            <button aria-label="boton de imagen" id="imageButton">
+            <button aria-label="boton de imagen" id="imageButton" class="glow-on-hover" onclick="mostrarAsideImg()">
+              <i class="fas fa-images"></i>
                 Imagen
             </button>
 
-            <button aria-label="boton de texto" id="textButton">
+            <button aria-label="boton de texto" id="textButton" class="glow-on-hover" onclick="mostrarTextPanel()">
+              <i class="fas fa-text-width"></i>
                 Texto
             </button>
 
-            <button aria-label="boton de modo oscuro" id="darkModeButton">
-                Modo oscuro
+
+            
+            <button class="boton-header modo-claro" id="modo-claro" onclick="cambioModoClaro()" aria-label="cambiar a modo claro">
+              <i class="fa fa-sun"></i> Modo claro
             </button>
+
+            <button class="boton-header modo-oscuro" id="modo-oscuro" onclick="cambioModoOscuro()" aria-label="cambiar a modo oscuro">
+              <i class="fa fa-moon"></i> Modo oscuro
+            </button>
+                       
         </section>
 
     </header>
     <!--------------------------END HEADER----------------------------------------->
 
     <!--------------------------START MAIN----------------------------------------->
-    <main>
+    <main class="cajaMain" id="contenedorPrincipal">
         <section aria-label="contenedor principal" id="mainContainer">
+            <article id="mainMemeContainer">
             <h2 aria-label="texto superior" id="topText" lang="es">TOP TEXT</h2>
+            <div aria-label="preview de imagen" class="previewImagePanel" id="previewImagePanel" crossorigin="anonymous"></div>
             <h2 aria-label="texto inferior" id="bottomText" lang="es">BOTTOM TEXT</h2>
-            <button aria-label="Botón para descargar el meme" id="downloadButton">Descargar meme</button>
+            </article>
+            <button aria-label="Botón para descargar el meme" id="downloadButton" onclick="descargarMeme()">Descargar meme</button>
         </section>
     </main>
     <!--------------------------END MAIN------------------------------------------->
 
     <!--------------------------START IMAGE PANEL---------------------------------->
-    <aside>
+    <aside aria-label="Sección de imagen" class="panel-img" id="panelImg">
         <section aria-label="sección panel de control de imagen" class="controlPanel">
-
+          <button class="buttonClose" id="buttonClose" lang="es" aria-label="Cerrar panel" aria-label="cerrar panel">
+            <i class="fas fa-times-circle" aria-hidden="true"></i>
+          </button>
             <article class="headerControlPanelContainer">
                 <h2 aria-label="Panel de control de imagen" class="tittleControlPanel" lang="es">IMAGEN</h2>
             </article>
 
             <article id="urlImgContainer">
-                <h3>URL</h3>
+                <h3 aria-label="Título panel url" class="urlTittleControlPanel">URL</h3>
                 <input aria-label="url de la imagen" type="url" id="imgUrlInput">
             </article>
 
             <article id="colorControlPanelContainer">
                 <div id="backgroundSettingsContainer">
                     <h3 class="boldTittleSettings">FONDO</h3>
+                </div>
+              <div class="columnas">
+                <div class="coloresImagen">
                     <input aria-label="escoge el fondo del meme" type="color" id="imgBackColorInput">
+                    <span id="colorImagenSpan" aria-hidden="true">#FFFFFF</span>
                 </div>
 
-                <select aria-label="Selecciona el modo de fusión del fondo de la imagen" id="blendBackImg"></select>
+                <div class="fondo-combinacion">
+                  <select  aria-label="Selecciona el modo de fusión del fondo de la imagen" id="opcionesFondo" class="filtros-opciones" >
+                    <option value="normal" onkeypress="actualizarTipoMezcla()" tabindex="1" aria-label="ninguno">Ninguno</option>
+                    <option value="lighten" onkeypress="actualizarTipoMezcla()" tabindex="2"  aria-label="aclarar">Aclarar</option>
+                    <option value="darken" onkeypress="actualizarTipoMezcla()" tabindex="3"  aria-label="oscurecer">Oscurecer</option>
+                    <option value="difference" onkeypress="actualizarTipoMezcla()" tabindex="4"  aria-label="diferencia">Diferencia</option>
+                    <option value="luminosity" onkeypress="actualizarTipoMezcla()" tabindex="5"  aria-label="luminosidad">Luminosidad</option>
+                    <option value="multiply" onkeypress="actualizarTipoMezcla()" tabindex="6"  aria-label="multiplicar">Multiplicar</option>
+                  </select>
+                </div>
+              </div>  
             </article>
 
             <article id="filtersControlPanelContainer">
-               <h3 class="boldTittleSettings">FILTROS</h3>
+                <h3 class="boldTittleSettings">FILTROS</h3>
 
-               <div class="controlPanelSlider">
-                   <h3 class="tittleSettings">BRILLO</h3>
-                   <input type="range" id="brightness" min="0" max="1" value="1" step="0.1">
-               </div>
-               
-               <div class="controlPanelSlider">
-                   <h3 class="tittleSettings">OPACIDAD</h3>
-                   <input type="range" id="opacity" min="0" max="1" value="1" step="0.1">
-               </div>
+                <div class="controlPanelSlider">
+                    <h3 class="tittleSettings">BRILLO</h3>
+                    <input type="range" id="brightness" min="0" max="1" value="1" step="0.1">
+                </div>
 
-               <div class="controlPanelSlider">
-                <h3 class="tittleSettings">CONTRASTE</h3>
-                <input type="range" id="contrast" min="100" max="1000" value="100">
-               </div>
+                <div class="controlPanelSlider">
+                    <h3 class="tittleSettings">OPACIDAD</h3>
+                    <input type="range" id="opacity" min="0" max="1" value="1" step="0.1">
+                </div>
 
-               <div class="controlPanelSlider">
-                <h3 class="tittleSettings">DESENFOQUE</h3>
-                <input type="range" id="blur" min="0" max="10" value="0" step="0.1">
-               </div>
+                <div class="controlPanelSlider">
+                    <h3 class="tittleSettings">CONTRASTE</h3>
+                    <input type="range" id="contrast" min="100" max="1000" value="100">
+                </div>
 
-               <div class="controlPanelSlider">
-                <h3 class="tittleSettings">ESCALA DE GRISES</h3>
-                <input type="range" id="grayscale" min="0" max="100" value="0">
-               </div>
+                <div class="controlPanelSlider">
+                    <h3 class="tittleSettings">DESENFOQUE</h3>
+                    <input type="range" id="blur" min="0" max="10" value="0" step="0.1">
+                </div>
 
-               <div class="controlPanelSlider">
-                <h3 class="tittleSettings">SEPIA</h3>
-                <input type="range" id="sepia" min="0" max="100" value="0">
-               </div>
+                <div class="controlPanelSlider">
+                    <h3 class="tittleSettings">ESCALA DE GRISES</h3>
+                    <input type="range" id="grayscale" min="0" max="100" value="0">
+                </div>
 
-               <div class="controlPanelSlider">
-                <h3 class="tittleSettings">HUE</h3>
-                <input type="range" id="hue" min="0" max="360" value="0">
-               </div>
+                <div class="controlPanelSlider">
+                    <h3 class="tittleSettings">SEPIA</h3>
+                    <input type="range" id="sepia" min="0" max="100" value="0">
+                </div>
 
-               <div class="controlPanelSlider">
-                <h3 class="tittleSettings">SATURADO</h3>
-                <input type="range" id="saturated" min="100" max="1000" value="100" step="10">
-               </div>
+                <div class="controlPanelSlider">
+                    <h3 class="tittleSettings">HUE</h3>
+                    <input type="range" id="hue" min="0" max="360" value="0">
+                </div>
 
-               <div class="controlPanelSlider">
-                <h3 class="tittleSettings">NEGATIVO</h3>
-                <input type="range" id="negative" min="0" max="1" value="0" step="0.1">
-               </div>
+                <div class="controlPanelSlider">
+                    <h3 class="tittleSettings">SATURADO</h3>
+                    <input type="range" id="saturated" min="100" max="1000" value="100" step="10">
+                </div>
 
-               <button id="imageFiltersButton"  aria-label="boton de reestablecer filtros"> RESTABLECER FILTROS</button>
+                <div class="controlPanelSlider">
+                    <h3 class="tittleSettings">NEGATIVO</h3>
+                    <input type="range" id="negative" min="0" max="1" value="0" step="0.1">
+                </div>
+
+                <button id="imageFiltersButton" aria-label="boton de reestablecer filtros"> RESTABLECER FILTROS</button>
             </article>
 
         </section>
-        
+
     </aside>
     <!--------------------------END IMAGE PANEL------------------------------------>
 
     <!--------------------------START TEXT PANEL----------------------------------->
-    <aside>
-
+    <aside aria-label="sección de texto" class="columnaLateralTexto" id="textoSeccion">
+      <button class="buttonClose" id="botonCerrarTexto" aria-label="Cerrar panel">
+        <i class="fas fa-times-circle" aria-hidden="true"></i>
+          </button>
+        <form>
+            <h2  aria-label="panel de texto" class="tituloTextoAside" id="tituloTexxt" >TEXTO</h2>
+      
+            <div  class="textColumnContainer">
+              <h4 class="tittleControlPanel"  aria-label="texto superior">SUPERIOR</h4>
+              <textarea  aria-label="ingrese el texto superior" type="text" id="editTopText" value="TOP TEXT"  >
+              TOP TEXT  
+              </textarea>
+            </div>
+      
+              
+            <div class="textColumnContainer">
+              <label id="boton-checkbox" class="myCheckbox" for="top-check"  aria-label=" quitar el texto superior">Sin texto superior
+                <input id="top-check" type="checkbox" >
+              </label>
+            </div>
+      
+            <br>
+      
+            <div class="textColumnContainer">
+              <h4 class="panel-control-title"  aria-label="texto inferior">INFERIOR</h4>
+              <textarea aria-label="ingrese el texto inferior" type="text" id="editBottomText" value="boton bajo">
+                BOTTOM TEXT
+              </textarea>          
+            </div>
+      
+            <div class="textColumnContainer">
+              <label for="top-check-2" class="top-check-2"  aria-label="quitar el texto inferior">Sin texto inferior
+                <input id="top-check-2" type="checkbox">
+              </label>
+            </div>
+            
+            <br> 
+            
+            <!--------------------TEXT STYLES---------------------->
+        <div class="textColumnContainer">
+            <label  id="fuente"  aria-label="elegir tipo de fuente">FUENTE</label>
+            <select name="option" id="estilosDeFuentes">
+              <option value="arial"  aria-label="fuente arial">Arial</option>
+              <option value="arial-black"  aria-label="arial black">Arial Black</option>
+              <option value="american-typewriter"  aria-label="American Typewriter">American Typewriter</option>
+              <option value="andale-mono" aria-label="Andale Mono">Andale Mono</option>
+              <option value="Impact" aria-label="Impact">Impact</option>
+              <option class="helvetica" value="helvetica" aria-label="Helvetica">Helvetica</option>
+            </select>
+          </div>
+  
+          <div class="styleButtonContainer" aria-label="boton de estilos">
+            <input id="tamañoLetra" type="number" value="40" min="0" max="50">
+            <button id="izquierda" ><i class="fas fa-align-left"></i></button>
+            <button  id="centrar"><i class="fas fa-align-center"></i></button>
+            <button  id="derecha"><i class="fas fa-align-right"></i></button>
+          </div>
+          
+          <div class="styleButtonContainer" aria-label="boton de estilos">
+            <div class="colorBotonTexto">
+              <label for="colorLetra" class="titleColorSettings" aria-label="boton de color">COLOR</label>
+              <div class="botonesColor">
+                <input type="color" id="colorLetra" class="colorLetraInput" value="#000000">
+                <span id="textoColor">#000000</span>
+              </div>
+            </div>
+  
+            <div class="codigoColor">
+              <label for="fondoLabel" class="fondoLabelInput" aria-label="boton de fondo">FONDO</label>
+              <div class="botonesColor">
+                <input type="color" id="fondoLabel" value="#9D72FF">
+                <span id="colorLabelFondo"> #9D72FF</span>
+              </div>
+            </div>
+          </div>
+  
+          <div class="textColumnContainer">
+  
+            <label for="transparente" class="transparente" onclick="textoFondoInvisible()"
+              aria-label="elegir fondo transparente">Fondo transparente
+              <input class="top-check-2" id="transparente" type="checkbox">
+            </label>
+  
+          </div>
+  
+  
+          <br>
+  
+          <div class="outline">
+            <label id="outline"  aria-label="elegir contorno">CONTORNO</label>
+          </div>
+  
+          <div class="contorno-boton">
+            <button id="botonContorno-vacio" onclick="contornoFuente(event, 'ninguno')"  aria-label="ninguno">NINGUNO</button>
+            <button id="botonContorno-claro" onclick="contornoFuente(event, 'claro')"  aria-label="claro">CLARO</button>
+            <button id="botonContorno-oscuro" onclick="contornoFuente(event, 'oscuro')"  aria-label="oscuro">OSCURO</button>
+          </div>
+          
+          <br>
+  
+          <div>
+            <label for="espaciado" id="characterPitch"  aria-label="boton de espaciado">ESPACIADO</label>
+            <input type="number" class="character-pitch" id="espaciadoValue" value="35" onchange="espaciadoTexto()">
+          </div>
+  
+          <br>
+  
+          <div>
+            <label for="interlineado" id="lineSpacing"  aria-label="boton de interlineado">INTERLINEADO</label>
+            <select name="interlineado" id="interlineadoValor" onclick="lineSpacing()">
+              <option value="0.8"  aria-label="valor 0.8">0.8</option>
+              <option value="1" aria-label="valor 1">1</option>
+              <option selected value="1.2" aria-label="valor 1.2">1.2</option>
+              <option value="1.5" aria-label="valor 1.5">1.5</option>
+              <option value="2" aria-label="valor 2">2</option>
+              <option value="2.5" aria-label="valor 2.5">2.5</option>
+            </select>
+          </div>
+                
+        </form>
     </aside>
     <!--------------------------END TEXT PANEL------------------------------------->
 
     <!---->
-
+    <script src="./script.js"></script>
 
 
 </body>
+
 </html>

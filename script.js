@@ -1,11 +1,12 @@
 'use strict'
 //VARIABLES A USAR 
+// defini tus elementos de html como const 
 let topText = document.getElementById('topText');
 let bottomText = document.getElementById('bottomText');
 let previewImagen = document.getElementById('previewImagen');
 let editTopText = document.getElementById('editTopText');
 let editBottomText = document.getElementById('editBottomText');
-
+// hay varios saltos de linea en esta lista de variables que no son necesarios, sacalos
 let topCheck = document.getElementById('top-check');
 let topCheck2 = document.getElementById('top-check-2');
 
@@ -62,6 +63,8 @@ const contenedorFondos = document.getElementById('contenedorFondos');
 
 /*FUNCIONES CUANDO SE CARGA LA PAGINA******************/
 
+// deja el espaciado correcto: 
+// window.onload = () => {
 window.onload =()=>{
     mostrarAsideImg()
     cambioModoClaro()
@@ -100,9 +103,13 @@ topCheck2.addEventListener('click', () => {
 
 //ESTILOS TIPOGRAFÍA
 estilosTipografias.addEventListener('change', () => {
+    // innecesario el interpolado aca, no estas agregandole nada a estilosTipografias.value!
     topText.style.fontFamily = `${estilosTipografias.value}`
 });
 
+// inutil repetir la funcion, la orden 
+// bottomText.style.fontFamily = `${estilosTipografias.value}`
+// deberia estar en la funcion de arriba y listo
 estilosTipografias.addEventListener('change', () => {
     bottomText.style.fontFamily = `${estilosTipografias.value}`
 });
@@ -177,6 +184,7 @@ function textoFondoInvisible() {
 };
 
 //CONTORNO FUENTE
+// no uses function, usa funciones flecha
 function contornoFuente(e, contorno) {
     e.preventDefault()
     switch (contorno) {
@@ -215,16 +223,18 @@ const lineSpacing = () => {
 /***************ASIDE IMAGEN****************************/
 
 //DE SECCION TEXTO A PANEL IMAGEN
-
+// o declaras todas tus variables arriba de todo, o las pones inmediatamente 
+// antes de la funcion que las va a usar, pero no mezcles estrategias
 const asideImagen = document.getElementById('panelImg');
 const textPanel = document.getElementById('textoSeccion');
 let contenedorPrincipal = document.getElementById('contenedorPrincipal');
 
 //MOSTRAR ASIDE IMAGEN
 mostrarAsideImg();
-
+// usa funciones flecha!!!!
 function mostrarAsideImg() {
     textPanel.style.display = 'none';
+    // display block, flex, inline, o none, pero no lo dejes vacio
     asideImagen.style.display = '';
     contenedorPrincipal.style.width = '80%';
 };
@@ -234,6 +244,7 @@ function mostrarAsideImg() {
 
 function mostrarTextPanel() {
     asideImagen.style.display = 'none';
+    // display block, flex, inline, o none, pero no lo dejes vacio
     textPanel.style.display = '';
     contenedorPrincipal.style.width = '80%';
 };

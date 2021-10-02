@@ -54,6 +54,7 @@ body {
     overflow: hidden;
     background-color: var(--color-body);
     color:  var(--color-titulo-header);
+    /* si vas a usar una tipografia, importala!! yo no veo esta tipografia porque no esta en mi computadora, veo times new roman */
     font-family: 'Segoe UI';
 }
 
@@ -168,8 +169,11 @@ body {
     top: 0;
     font-weight: 800;
     background-color: var(--framePicture);
+    /* no uses numeros asi para z-index ya que ocultan cuantos elementos tienen z en tu pagina
+    usa 1. si necesitas otro elemento, dale 2. si necesitas otro, dale 3.  */
     z-index: 999;
 }
+/* no dejes codigo comentado en una entrega */
 
 /*.textoBajo {
     width: 100%;
@@ -279,6 +283,9 @@ body {
 
 .styleButtonContainer {
     display: flex;
+    /* no uses important, ya que tapa los motivos por los que tu codigo no funciona
+    inspecciona este elemento: no se ve en row porque lo pisa el flex direction column en .columnaLateralTexto div
+    eso es un error. important te tapa ese error, pero no lo soluciona.  */
     flex-direction: row !important;
 }
 
@@ -290,6 +297,7 @@ body {
 
 input,
 select {
+    /* este padding es el que hace que tus inputs de color parezcan no ir hasta el final o el principio*/
     padding: 2%;
     margin-right: 2%;
 }
@@ -606,6 +614,7 @@ input[type=color]::-webkit-color-swatch {
     margin-bottom: 6px;
     border-radius: 5%;
     color: var(--colorLetras);
+    /* ojo aca, esto no deberia estar */
     ;
 }
 

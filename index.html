@@ -1,4 +1,11 @@
 <!DOCTYPE html>
+  <!-- La pagina esta en español, pero el lenguaje del documento es ingles. Un lector de pantalla trataria de 
+leerla en ingles (va a leer "yiniradour di mims") y buscadores como google van a recomendar esta web a 
+angloparlantes.
+El lang del documento debe coincidir con el lenguaje que usan los usuarios de esta pagina. 
+
+Si el lang del documento esta en espanol, no debes agregar lang es a cada elemento en particular-->
+ 
 <html lang="en">
 
 <head>
@@ -16,12 +23,17 @@
     <meta name="description" content="Proyecto Editor de memes correspondiente al segundo módulo de ADA">
     <title>Editor de memes</title>
 </head>
+<!-- separa tus clases con-guiones, igual que los ids. camelCase es para javascript -->
 
 <body class="cambiarModoOscuro">
     <!--------------------------START HEADER--------------------------------------->
     <header id="headerContainer">
         <h1 aria-label="generador de texto" id="tittleApp" class="tittleApp" lang="es">GENERADOR DE MEMES</h1>
         <section id="containerMenuButtons">
+                          <!-- Preferimos asignar las funciones en el JS directamente, para respetar el 
+                principio de separación de responsabilidades:  HTML se ocupa de la estructura,
+                JS se ocupa del comportamiento -->
+       
             <button aria-label="boton de imagen" id="imageButton" class="glow-on-hover" onclick="mostrarAsideImg()">
               <i class="fas fa-images"></i>
                 Imagen
@@ -71,6 +83,7 @@
             </article>
 
             <article id="urlImgContainer">
+              <!-- esto no es un titulo, es un label!! mismo para todos tus h3 -->
                 <h3 aria-label="Título panel url" class="urlTittleControlPanel">URL</h3>
                 <input aria-label="url de la imagen" type="url" id="imgUrlInput">
             </article>
@@ -186,6 +199,7 @@
             </div>
       
             <div class="textColumnContainer">
+              <!-- "top-check-2" es un mal nombre de clase.  -->
               <label for="top-check-2" class="top-check-2"  aria-label="quitar el texto inferior">Sin texto inferior
                 <input id="top-check-2" type="checkbox">
               </label>
